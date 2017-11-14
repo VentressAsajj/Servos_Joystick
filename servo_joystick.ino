@@ -1,6 +1,6 @@
 /*  @nuria_pp
  *  Referencias
- *    Armuino --- Funduino Joystick Shield ---
+ *    Arduino --- Funduino Joystick Shield ---
  *      Playlist: https://www.youtube.com/playlist?list=PLRFnGJH1nJiKIpz_ZyaU-uAZOkMH8GAcw
  *      Part 1. Introduction - Basic Functions: https://www.youtube.com/watch?v=lZPZuBCFMH4 
 */
@@ -15,8 +15,8 @@ Servo servo1;
 Servo servo2;
 
 /* Definicion de constantes */
-const int joyH = A1;          /* L/R  eje horizontal */
-const int joyV = A0;          /* U/D eje vertical */
+const int joystickH = A1;          /* L/R  eje horizontal */
+const int joystickV = A0;          /* U/D eje vertical */
 
             
 /* Asociamos los pines digitales del Arduino a los botones */
@@ -33,7 +33,7 @@ const byte PIN_ANALOG_Y = 1;
 
 /* servoValue: leemos el valor del pin analogico */
 int servoValue;                 
-int valH = 90, valV = 90;     /* valor para servo horizontal y vertical */
+int valueH = 90, valueV = 90;     /* valor para servo horizontal y vertical */
 
 void setup() {
   /* 
@@ -54,20 +54,20 @@ void loop() {
   servoValue = analogRead( PIN_ANALOG_X );
   
   Serial.println(servoValue);
-  joyValueCompare(servoValue, valH);
+  joyValueCompare(servoValue, valueH);
 
   /* ajusta la posición del servo de acuerdo con el valor escalado */
-  servo2.write(180 - valH);                  
+  servo2.write(180 - valueH);                  
   
   /* Lee el valor vertical de joystick entre 0 y 1023 */
-  //servoVal = analogRead(joyV);
+  //servoVal = analogRead(joystickV);
 
   servoValue = analogRead( PIN_ANALOG_Y );
-  joyValueCompare(servoValue, valV);
+  joyValueCompare(servoValue, valueV);
 
   /* ajusta la posición del servo de acuerdo con el valor escalado */
-  //servo1.write(180 - valV);                
-  servo1.write(valV);
+  //servo1.write(180 - valueV);                
+  servo1.write(valueV);
 
   delay(15);                                            
 
@@ -79,9 +79,9 @@ void loop() {
 /*
 void outputJoystick(){
 
-    Serial.print(analogRead(joyH));
+    Serial.print(analogRead(joystickH));
     Serial.println ("----------------");
-    Serial.print(analogRead(joyV));
+    Serial.print(analogRead(joystickV));
     Serial.println ("----------------");
 } // Fin_Funcion_outputJoystick
 */
@@ -90,28 +90,28 @@ void outputJoystick(){
  * Funcion joyValueCompare
  *  Compara servoVal. Lee del joystick y actualiza el valor del eje dado
  */
-void joyValueCompare(int servoVal, int &val){
+void joyValueCompare(int servoVal, int &value){
   
   // foward
-  if(servoVal > 1000 && val < 180)
-    val += 10;
-  else if(servoVal > 800 && val < 180)
-    val += 5;
-  else if(servoVal > 600 && val < 180)
-    val += 2;
+  if(servoVal > 1000 && value < 180)
+    value += 10;
+  else if(servoVal > 800 && value < 180)
+    value += 5;
+  else if(servoVal > 600 && value < 180)
+    value += 2;
     
   // backward  
-  if(servoVal < 20 && val > 0)
-    val -= 10;
-  else if(servoVal < 200 && val > 0)
-    val -= 5;
-  else if(servoVal < 400 && val > 0)
-    val -= 2;
+  if(servoVal < 20 && value > 0)
+    value -= 10;
+  else if(servoVal < 200 && value > 0)
+    value -= 5;
+  else if(servoVal < 400 && value > 0)
+    value -= 2;
     
-  if(val > 180){
-    val = 180;
+  if(value > 180){
+    value = 180;
   }
-  else if(val < 0){
-    val = 0;
+  else if(value < 0){
+    value = 0;
   }
 } // Fin_Funcion_joyValueCompare
