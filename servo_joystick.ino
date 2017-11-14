@@ -3,6 +3,8 @@
  *    Arduino --- Funduino Joystick Shield ---
  *      Playlist: https://www.youtube.com/playlist?list=PLRFnGJH1nJiKIpz_ZyaU-uAZOkMH8GAcw
  *      Part 1. Introduction - Basic Functions: https://www.youtube.com/watch?v=lZPZuBCFMH4 
+ *  
+ *  Nota: el control del joystick no es mio, siento no recordar de donde lo saque.
 */
 
 
